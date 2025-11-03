@@ -14,8 +14,12 @@ public class InteractableNPC : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
+                Debug.Log("H presionada cerca del NPC");
                 DialogueManager.Instance.OpenDialogue(dialogueData);
             }
         }
     }
+
+
+
 }
