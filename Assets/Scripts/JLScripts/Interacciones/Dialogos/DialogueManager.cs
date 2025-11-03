@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,81 +11,169 @@ public class DialogueManager : MonoBehaviour
     [Header("UI References")]
     public GameObject dialoguePanel;
     public TMP_Text npcNameText;
-    public TMP_Text introText;
+    public TMP_Text dialogueText;
     public Transform buttonContainer;
-    public GameObject buttonPrefab;
+    public Button buttonPrefab;
 
-    private void Awake()
+    private Queue<string> sentences = new Queue<string>();
+    private DialogueData currentDialogue;
+    private Transform currentNPC;
+
+    private bool isTyping = false;
+
+    void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        dialoguePanel.SetActive(false);
     }
 
-    public void OpenDialogue(DialogueData data)
+    // Asignar NPC actual
+    public void SetCurrentNPC(Transform npc)
     {
-        dialoguePanel.SetActive(true);
-        npcNameText.text = data.npcName;
+        currentNPC = npc;
+        Debug.Log("NPC actual asignado: " + npc.name);
+    }
 
-        // Limpia botones anteriores
+    // Abrir diálogo
+    public void OpenDialogue(DialogueData dialogueData)
+    {
+        if (dialogueData == null) return;
+
+        currentDialogue = dialogueData;
+
+        dialoguePanel.SetActive(true);
+        npcNameText.text = dialogueData.npcName;
+        dialogueText.text = "";
+
+        sentences.Clear();
+
+        // Encolar todas las líneas de introTexts
+        if (dialogueData.introTexts != null && dialogueData.introTexts.Length > 0)
+        {
+            foreach (string line in dialogueData.introTexts)
+                sentences.Enqueue(line);
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(DisplaySentencesCoroutine());
+    }
+
+    // Corrutina principal para mostrar todas las líneas
+    private IEnumerator DisplaySentencesCoroutine()
+    {
+        // Ocultar botones mientras se muestran líneas
         foreach (Transform child in buttonContainer)
             Destroy(child.gameObject);
 
-        // Inicia coroutine para mostrar texto inicial
-        StartCoroutine(ShowTextThenButtons(data));
-    }
-
-    private IEnumerator ShowTextThenButtons(DialogueData data)
-    {
-        // Decide texto inicial (bienvenida o repetitivo)
-        bool firstTime = !GameState.Instance.interactedNPCs.Contains(data.npcName);
-        string textToShow = firstTime ? data.introText : string.IsNullOrEmpty(data.repeatText) ? data.introText : data.repeatText;
-
-        // Escribe el texto letra por letra
-        introText.text = "";
-        foreach (char c in textToShow)
+        while (sentences.Count > 0)
         {
-            introText.text += c;
-            yield return new WaitForSeconds(0.03f);
+            string line = sentences.Dequeue();
+            yield return StartCoroutine(TypeSentence(line));
+
+            // Esperar a click izquierdo o espacio para avanzar
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space));
         }
 
-        // Texto inicial ya mostrado, ahora lo ocultamos
-        introText.text = "";
+        // Mostrar botones al final del introText
+        ShowOptions();
+    }
 
-        // Mostrar botones después
-        foreach (DialogueOption option in data.options)
+    // Máquina de escribir
+    private IEnumerator TypeSentence(string sentence)
+    {
+        isTyping = true;
+        dialogueText.text = "";
+        foreach (char c in sentence.ToCharArray())
         {
-            GameObject btnObj = Instantiate(buttonPrefab, buttonContainer);
-            Button btn = btnObj.GetComponent<Button>();
-            TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
-            txt.text = option.text;
+            dialogueText.text += c;
+            yield return new WaitForSeconds(0.02f);
+        }
+        isTyping = false;
+    }
 
-            bool unlocked = option.IsUnlocked();
-            btn.interactable = unlocked;
+    // Mostrar botones dinámicos
+    private void ShowOptions()
+    {
+        // Limpiar botones anteriores
+        foreach (Transform child in buttonContainer)
+            Destroy(child.gameObject);
 
-            btn.onClick.AddListener(() =>
+        if (currentDialogue.options == null || currentDialogue.options.Length == 0) return;
+
+        foreach (DialogueOption option in currentDialogue.options)
+        {
+            Button newButton = Instantiate(buttonPrefab, buttonContainer);
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
+            buttonText.text = option.text;
+
+            // Validar si el botón está disponible
+            bool canUse = true;
+            if (option.requiresItem && !GameState.Instance.obtainedItems.Contains(option.requiredItem))
+                canUse = false;
+
+            if (option.requiresNPC && !GameState.Instance.interactedNPCs.Contains(option.requiredNPC))
+                canUse = false;
+
+            newButton.interactable = canUse;
+
+            // Colores del botón
+            ColorBlock colors = newButton.colors;
+            colors.disabledColor = new Color(0.5f, 0.5f, 0.5f);   // gris
+            colors.highlightedColor = new Color(0.3f, 0.7f, 1f);   // celeste
+            newButton.colors = colors;
+
+            // Listener del click
+            newButton.onClick.AddListener(() =>
             {
-                // Mostrar respuesta según botón
-                introText.text = option.response;
-
-                // Si el botón otorga un ítem
-                if (option.grantsItem)
-                    GameState.Instance.obtainedItems.Add(option.grantedItem);
-
-                // Opcional: después de mostrar mensaje de agradecimiento/despedida, limpiar botones
-                foreach (Transform child in buttonContainer)
-                    Destroy(child.gameObject);
+                StartCoroutine(DisplayOptionResponse(option));
             });
         }
-
-        // Registrar que ya interactuaste con el NPC
-        GameState.Instance.interactedNPCs.Add(data.npcName);
     }
 
-    public void CloseDialogue()
+    // Mostrar respuesta de botón (puede ser varias líneas)
+    private IEnumerator DisplayOptionResponse(DialogueOption option)
+    {
+        // Limpiar botones mientras se muestran las respuestas
+        foreach (Transform child in buttonContainer)
+            Destroy(child.gameObject);
+
+        sentences.Clear();
+
+        // Encolar las líneas de respuesta
+        string[] responseLines = option.response.Split('\n');
+        foreach (string line in responseLines)
+            sentences.Enqueue(line);
+
+        // Mostrar cada línea de respuesta
+        while (sentences.Count > 0)
+        {
+            string line = sentences.Dequeue();
+            yield return StartCoroutine(TypeSentence(line));
+
+            // Esperar a click o espacio
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space));
+        }
+
+        // Si es botón “Irse”, cerramos diálogo
+        if (option.text.ToLower() == "irse")
+        {
+            EndDialogue();
+            yield break;
+        }
+
+        // Mostrar botones de nuevo después de la respuesta
+        ShowOptions();
+    }
+
+    // Cerrar diálogo
+    public void EndDialogue()
     {
         dialoguePanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        introText.text = "";
+        dialogueText.text = "";
+        sentences.Clear();
+
         foreach (Transform child in buttonContainer)
             Destroy(child.gameObject);
     }

@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 295211349316078291}
   - component: {fileID: 896169002875766711}
   - component: {fileID: 77585349163536661}
+  - component: {fileID: 7340434709463782310}
   m_Layer: 0
   m_Name: DialogueButton
   m_TagString: Untagged
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -234,9 +235,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.42196515, g: 0.46155378, b: 0.509434, a: 1}
-    m_SelectedColor: {r: 0.61332136, g: 0.70678, b: 0.7207546, a: 1}
-    m_DisabledColor: {r: 0.20588818, g: 0.20674953, b: 0.23773581, a: 0.5019608}
+    m_PressedColor: {r: 0.81886786, g: 0.49904585, b: 0.5918569, a: 1}
+    m_SelectedColor: {r: 0.51167214, g: 0.46898532, b: 0.7509433, a: 1}
+    m_DisabledColor: {r: 0.4339623, g: 0.3201495, b: 0.3380025, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -255,3 +256,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7340434709463782310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936270059658343660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e117186cb447e448eeb80025587319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

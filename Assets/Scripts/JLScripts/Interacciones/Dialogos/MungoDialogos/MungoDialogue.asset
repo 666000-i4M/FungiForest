@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: MungoDialogue
   m_EditorClassIdentifier: 
   npcName: MUNGO
-  introText: 'el alcalde: Bienvenido de nuevo tu debes de ser Leo tu abuela me a
-    dicho que estabas de regreso, hace mucho que no visitas el pueblo, te traigo
-    un obsequio para que no te pierdas'
+  introTexts:
+  - Oh, tu debes de ser Leo, tu abuela me dijo que vendrias de visita  a Fungi Forest.
+  - Permiteme presentarme, yo soy el alcalde de Fungi Forest, mi nombre es Mungo.
+  - Como Alcalde mi deber y honor  es darte la bienvenida, te traje un obsequio para
+    que no te pierdas
   repeatText: Que tal la estas pasando Leo, piensas quedarte permanentemente en Fungi
     Forest?
   options:
