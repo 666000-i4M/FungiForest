@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
     public PlayerInput playerInput;
  
     [Header("Configuración de cámara")]
-    [SerializeField] Vector3 offset = new Vector3(0, 10f, -5f);
+    [SerializeField] Vector3 offset = new Vector3(0, 5f, -7f);
     [SerializeField] float sensitivity = 120f;
     [SerializeField] float smoothSpeed = 10f;
     [SerializeField] float minPitch = -20f;

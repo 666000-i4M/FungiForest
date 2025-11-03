@@ -84,6 +84,6 @@ public class IntroController : MonoBehaviour
 
     void StartGame()
     {
-        SceneManager.LoadScene("MainScene"); 
+        SceneManager.LoadScene("ElJuego"); 
     }
 }
