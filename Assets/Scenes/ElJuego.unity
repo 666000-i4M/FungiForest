@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1943115178}
+    - target: {fileID: 7495638312446501960, guid: db64e92380cf49347b71b5979f9a4d12, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8148364412420742265, guid: db64e92380cf49347b71b5979f9a4d12, type: 3}
       propertyPath: m_Name
       value: 'LeoIdle '

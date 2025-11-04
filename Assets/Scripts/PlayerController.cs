@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movimiento")]
-    [SerializeField] float speed = 5f;
+    [SerializeField] float walkSpeed = 3f;        // Velocidad normal (caminar)
+    [SerializeField] float runSpeed = 6f;         // Velocidad correr (Shift)
+    [SerializeField] float jumpHeight = 2f;       // Altura del salto
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float rotationSpeed = 10f;
 
@@ -17,8 +19,10 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     PlayerInput playerInput;
 
-    Vector3 velocity;      // Para gravedad
-    Vector2 input;         // Input del jugador
+    Vector3 velocity;
+    Vector2 input;
+    bool isGrounded;
+    
 
     void Start()
     {
@@ -26,7 +30,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
 
-        // Si no hay cámara asignada, buscar automáticamente la principal
         if (cameraFollow == null)
         {
             CameraFollow cam = FindObjectOfType<CameraFollow>();
@@ -46,37 +49,50 @@ public class PlayerController : MonoBehaviour
         if (playerInput == null || cameraFollow == null)
             return;
 
-        // Leer input del jugador
+        // Leer input del movimiento
         input = playerInput.actions["Move"].ReadValue<Vector2>();
+
+        // Leer input de correr (Shift)
+        bool isRunning = playerInput.actions["Run"].IsPressed();
 
         // Obtener dirección relativa a la cámara
         Vector3 camForward = cameraFollow.GetCameraForward();
         Vector3 camRight = cameraFollow.GetCameraRight();
         Vector3 move = camForward * input.y + camRight * input.x;
 
+        // Velocidad según si corre o camina
+        float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
         // Mover al jugador
         if (move.magnitude > 0.01f)
         {
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * currentSpeed * Time.deltaTime);
 
-            // Rotar suavemente hacia la dirección de movimiento
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // Animaciones
         bool isMoving = move.magnitude > 0.1f;
-        animator.SetBool("isWalking", isMoving);
+        animator.SetBool("isWalking", isMoving && !isRunning);  
+        animator.SetBool("isRunning", isMoving && isRunning);  
+        animator.SetBool("Grounded", isGrounded);
     }
 
     void HandleGravity()
     {
-        bool isGrounded = controller.isGrounded;
+        isGrounded = controller.isGrounded;
 
-        if (isGrounded && velocity.y < 0)
-            velocity.y = -2f; // Mantener contacto con el suelo
+    // SALTO INSTANTÁNEO: Trigger + Física
+    if (isGrounded && playerInput.actions["Jump"].WasPressedThisFrame())
+    {
+        animator.SetTrigger("Jump");  // ← INSTANTÁNEO, sincroniza con física
+        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+    }
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+    if (isGrounded && velocity.y < 0)
+        velocity.y = -2f;
+
+    velocity.y += gravity * Time.deltaTime;
+    controller.Move(velocity * Time.deltaTime);
     }
 }
