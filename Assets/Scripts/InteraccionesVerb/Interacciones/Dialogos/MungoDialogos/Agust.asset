@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: Agust
+  m_EditorClassIdentifier: 
+  npcName: AGUST
+  introTexts:
+  - "Oh tu debes de ser el nuevo vecino, Lamento no haber ido a la parada de bus
+    para darte la bienvenida, es que hay cierto fungi con el cual no me apetece toparme
+    el d\xEDa de hoy\u2026.. y NUNCA DE ECHO "
+  - "ejem.. perd\xF3n por eso, Bienvenido a Fungi Forest :D"
+  repeatText: "Te a gustado el pan es el mejor pan que podr\xE1s probar te lo aseguro
+    amigo."
+  options:
+  - text: 
+    introTexts: []
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []

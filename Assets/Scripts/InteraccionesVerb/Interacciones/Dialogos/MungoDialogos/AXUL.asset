@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: AXUL
+  m_EditorClassIdentifier: 
+  npcName: AXUL
+  introTexts:
+  - "Oh hola, tu debes de ser el nuevo \xBFno?"
+  - Bienvenido a fungi forest, no pude ir a verte, por que el alcalde tiene algunos
+    problemitas conmigo.
+  - Veo que estas algo perdido sabes Leo...
+  - "\"Tu verdadero mapa no est\xE1 en un folleto, sino en la red que tejieron aquellos
+    que ya no se buscan. Desanuda las ra\xEDces en ellos para que el ser central
+    recuerde su propia luz.\""
+  repeatText: "\"Tu verdadero mapa no est\xE1 en un folleto, sino en la red que tejieron
+    aquellos que ya no se buscan. Desanuda las ra\xEDces en ellos para que el ser
+    central recuerde su propia luz.\""
+  options:
+  - text: preguntar sobre el alcalde
+    introTexts:
+    - El alcalde es un buen tipo pero, puede ser un paranoico a veces sabes
+    - "entiendo, el solo quiere cuidar a la poblaci\xF3n de Fungi Forest, pero. Creo
+      que el esta cayendo en suposiciones yestereotipos."
+    - ' Solo digamos que el alcalde no me tiene en muy buena estima'
+    - ' Cree que un hechicero maligno, pero no soy ninguna de esas cosas'
+    - ' Cree que un hechicero maligno, pero no soy ninguna de esas cosas'
+    - "ja es broma, si soy un hechicero, pero no soy maligno, \xBFbueno solo veces\u2026
+      la mayor parte del tiempo quiz\xE1?"
+    - Pero en lo que incumbe al alcalde, no son mas que calumnias, si tan solo pudiera
+      encontrar una forma de hablarle.
+    - "A ya sel, puedo hacer una te especial para \xE9l, lo calmara y relajara as\xED
+      podre explicarle que sus suposiciones sobre mi son falsas, necesito unos ingredientes"
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItem: 0
+    grantedItem: 
+  - text: Preguntar sobre la frase
+    introTexts:
+    - El alcalde es un buen tipo pero, puede ser un paranoico a veces sabes
+    requiresItem: 0
+    requiredItem: Algunas veces hacer el bien te hace sentir bien.
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItem: 0
+    grantedItem: 
+  - text: Irse
+    introTexts:
+    - Suerte, y que encuentres lo que estas buscando.
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItem: 0
+    grantedItem: 
+  - text: preguntar sobre los ingredientes
+    introTexts:
+    - Necesitare hilo de seda y hojas de menta
+    - Puedes obtener el hilo  de los gusanos y las hojas en el bosque
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItem: 0
+    grantedItem: 
+  - text: Dar Ingredientes
+    introTexts:
+    - Los conseguiste, gracias Leo
+    requiresItem: 1
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItem: 0
+    grantedItem: 
