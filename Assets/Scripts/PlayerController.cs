@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float rotationSpeed = 10f;
+    public static PlayerController Instance { get; private set; }
 
     [Header("Referencias")]
     public CameraFollow cameraFollow;
