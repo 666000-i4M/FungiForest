@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movimiento")]
     [SerializeField] float walkSpeed = 3f;        // Velocidad normal (caminar)
-    [SerializeField] float runSpeed = 6f;         // Velocidad correr (Shift)
+    [SerializeField] float runSpeed = 8f;         // Velocidad correr (Shift)
     [SerializeField] float jumpHeight = 2f;       // Altura del salto
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float rotationSpeed = 10f;
