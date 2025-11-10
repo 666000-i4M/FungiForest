@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: Gregorio
+  m_EditorClassIdentifier: 
+  npcName: GREGORIO
+  introTexts: []
+  repeatText: FIRME!!!
+  options:
+  - text: Preguntar sobre Agust
+    introTexts:
+    - Oh, ese panadero grosero
+    - "derepente un dia dejo de hablarme y no se por que , no le ense\xF1aron que
+      es de mala educacion, no reponder a tus superiores"
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Preguntar sobre Grisel
+    introTexts:
+    - Mi hija, si fuera por mi estaria de regreso en casa
+    - Pero mi esposa no quiere saber nada de ella, dice que arruino el honor de la
+      familia
+    - "Pero yo la extra\xF1o y quiero que mi nieta sepa quienes fueron sus abuelos
+      antes de partir."
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Irse
+    introTexts:
+    - Hasta luego recluta
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []

@@ -21,9 +21,44 @@ MonoBehaviour:
   repeatText: "Te a gustado el pan es el mejor pan que podr\xE1s probar te lo aseguro
     amigo."
   options:
-  - text: 
+  - text: Irse
     introTexts: []
     requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Preguntar sobre Gregorio
+    introTexts:
+    - Ese anciano loco, es un ladron
+    - "Nunca me devolvio el rodillo que le preste an pasado 5 a\xF1os de eso"
+    - Y todavia finge que eso nunca paso, pero yo lo recuerdo como si fuera ayer...
+      COMO SE ATREVE
+    - Las herramientas de un panadero son sus valiosas armas, noy hay nada mas valioso
+      almenos para mi.
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Preguntar sobre el Gusano
+    introTexts:
+    - "Oh, ese peque\xF1in es muy lindo no"
+    - Lastima que sea todo un tragon, ayer casi se como todos mis panes, si no me
+      hubiera dado cuenta, ese pillo se hubiera dado un festin
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Dar Item
+    introTexts:
+    - Mi rodillo a vuelto a MII
+    - Que dices, que el anciano me pide disculpas
+    requiresItem: 1
     requiredItem: 
     requiresNPC: 0
     requiredNPC: 

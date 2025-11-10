@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement * Time.deltaTime);
 
         //salto con tecla Space
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Q) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;

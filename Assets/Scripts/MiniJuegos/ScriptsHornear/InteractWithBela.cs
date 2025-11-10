@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InteractWithBela : MonoBehaviour
 {
-    public BakingGameController bakingGame;
+   /* public BakingGameController bakingGame;
     public int requiredItems = 2; // Cantidad de ítems necesarios
 
     void OnTriggerEnter(Collider other)
@@ -20,4 +20,6 @@ public class InteractWithBela : MonoBehaviour
             }
         }
     }
+
+    */
 }

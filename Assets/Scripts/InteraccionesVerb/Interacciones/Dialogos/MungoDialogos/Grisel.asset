@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: Grisel
+  m_EditorClassIdentifier: 
+  npcName: GRISEL
+  introTexts:
+  - Hola, Se bienvenido a fungi forest
+  repeatText: 
+  options:
+  - text: Preguntar sobre Bela
+    introTexts: []
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Irse
+    introTexts: []
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Preguntar sobre Pandora
+    introTexts:
+    - "Oh, es mi hijita aveces suele ser un poco complicada pero aun asi es una ni\xF1a
+      muy dulce"
+    - "Creo que esta enojada con su amigo Roberto, pero son ni\xF1os se les pasara
+      rapido"
+    - Y volveran a ser amigos pronto
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Preguntar sobre Rivel
+    introTexts:
+    - ...
+    - "Es el padre de Pandora, o bueno lo era anttes de que el pasara a mejor vida
+      hace un a\xF1o"
+    - ...(Suspiro)
+    - Estabamos tan enamorados, pero un dia el decidio ir de viaje
+    - El era un espiritu libre y siempre regresaba de sus aventuras, Pandora eredo
+      eso de el
+    - Pero un dia no volvio. Mi madre se a encaprichado en decir que el me a abandonado,
+      pero yo se con quien me case y se que el no abandonaria a su familia
+    - "Se que en donde este el nos extra\xF1a."
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []

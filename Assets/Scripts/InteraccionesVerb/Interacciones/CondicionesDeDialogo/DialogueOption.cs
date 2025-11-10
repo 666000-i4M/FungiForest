@@ -1,3 +1,6 @@
+// DialogueOption.cs
+using UnityEngine;
+
 [System.Serializable]
 public class DialogueOption
 {
@@ -11,7 +14,6 @@ public class DialogueOption
     public string requiredNPC;   
     public bool grantsItems;               // indica si este botón da ítems
     public ItemData[] grantedItems;        // lista de ítems a otorgar
-
 
     public bool IsUnlocked()
     {

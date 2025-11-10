@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DoorPuzzleTrigger : MonoBehaviour
 {
-    [Header("Configuración")]
+   /* [Header("Configuración")]
     public float interactDistance = 2f;
     public KeyCode interactKey = KeyCode.E;
 
@@ -22,5 +22,5 @@ public class DoorPuzzleTrigger : MonoBehaviour
             else
                 Debug.LogWarning("No se encontró PuzzleManager3D en la escena");
         }
-    }
+    }*/
 }

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: Roberto
+  m_EditorClassIdentifier: 
+  npcName: ROBERTO
+  introTexts:
+  - Hola, tu eres el visitante no?
+  - Bienvenido a Fungi forest
+  repeatText: Que tal todo?
+  options:
+  - text: Preguntar sobre Pandora
+    introTexts:
+    - Ella es mi amiga, o bueno, lo era antes de nuestra discusion
+    - Estabamos jugando a atrapar al gusano. Pero ella me empujo
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Dar Item
+    introTexts:
+    - Oh, para mi gracias
+    - Que dices, que no deberia de estar enojado con Pandora?
+    - Tu crees que ella podra perdonarme?
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Irse
+    introTexts:
+    - Que lo pases bien
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []

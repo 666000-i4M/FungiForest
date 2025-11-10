@@ -1,3 +1,4 @@
+// DialogueManager.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,8 +19,6 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences = new Queue<string>();
     private DialogueData currentDialogue;
     private Transform currentNPC;
-
-    private bool isTyping = false;
 
     void Awake()
     {
@@ -61,26 +60,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Corrutina principal para mostrar todas las líneas
-   /* private IEnumerator DisplaySentencesCoroutine()
-    {
-        // Ocultar botones mientras se muestran líneas
-        foreach (Transform child in buttonContainer)
-            Destroy(child.gameObject);
-
-        while (sentences.Count > 0)
-        {
-            string line = sentences.Dequeue();
-            yield return StartCoroutine(TypeSentence(line));
-
-            // Esperar a click izquierdo o espacio para avanzar
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space));
-        }
-
-        // Mostrar botones al final del introText
-        ShowOptions();
-    }*/
-
-     private IEnumerator DisplaySentencesCoroutine()
+    private IEnumerator DisplaySentencesCoroutine()
     {
         // Limpiar botones mientras mostramos líneas
         foreach (Transform child in buttonContainer)
@@ -95,7 +75,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space));
         }
 
-        // ✅ Limpiar texto antes de mostrar botones
+        // Limpiar texto antes de mostrar botones
         dialogueText.text = "";
 
         // Mostrar botones al final del introText
@@ -105,17 +85,13 @@ public class DialogueManager : MonoBehaviour
     // Máquina de escribir
     private IEnumerator TypeSentence(string sentence)
     {
-        isTyping = true;
         dialogueText.text = "";
         foreach (char c in sentence.ToCharArray())
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(0.02f);
         }
-        isTyping = false;
     }
-    
-
 
     // Mostrar botones dinámicos
     private void ShowOptions()
@@ -133,12 +109,7 @@ public class DialogueManager : MonoBehaviour
             buttonText.text = option.text;
 
             // Validar si el botón está disponible
-            bool canUse = true;
-            if (option.requiresItem && !GameState.Instance.obtainedItems.Contains(option.requiredItem))
-                canUse = false;
-
-            if (option.requiresNPC && !GameState.Instance.interactedNPCs.Contains(option.requiredNPC))
-                canUse = false;
+            bool canUse = option.IsUnlocked();
 
             newButton.interactable = canUse;
 
@@ -157,20 +128,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Mostrar respuesta de botón (puede ser varias líneas)
- private IEnumerator DisplayOptionResponse(DialogueOption option)
-{
-    // Limpiar botones
-    foreach (Transform child in buttonContainer)
-        Destroy(child.gameObject);
+    private IEnumerator DisplayOptionResponse(DialogueOption option)
+    {
+        // Limpiar botones
+        foreach (Transform child in buttonContainer)
+            Destroy(child.gameObject);
 
-    sentences.Clear();
+        sentences.Clear();
 
-    // Encolar todas las líneas del introText del botón
-    foreach (string line in option.introTexts)
-        sentences.Enqueue(line);
+        // Encolar todas las líneas del introText del botón
+        foreach (string line in option.introTexts)
+            sentences.Enqueue(line);
 
-    // Mostrar todas las líneas
-    yield return StartCoroutine(DisplaySentencesCoroutine());
+        // Mostrar todas las líneas
+        yield return StartCoroutine(DisplaySentencesCoroutine());
 
         // Si es botón “Irse”, cerramos diálogo
         if (option.text.ToLower() == "irse")
@@ -178,23 +149,23 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             yield break;
         }
-    // Otorgar ítems si corresponde
-    if (option.grantsItems && option.grantedItems != null)
-    {
-        foreach (ItemData item in option.grantedItems)
+
+        // Otorgar ítems si corresponde
+        if (option.grantsItems && option.grantedItems != null)
         {
-            if (item != null)
+            foreach (ItemData item in option.grantedItems)
             {
-                InventoryManager.Instance.AddItem(item);
-                Debug.Log("Se otorgó ítem: " + item.itemName);
+                if (item != null)
+                {
+                    InventoryManager.Instance.AddItem(item);
+                    Debug.Log("Se otorgó ítem: " + item.itemName);
+                }
             }
         }
-}
 
-
-    // Mostrar botones otra vez si la conversación continúa
-    ShowOptions();
-}
+        // Mostrar botones otra vez si la conversación continúa
+        ShowOptions();
+    }
 
     // Cerrar diálogo
     public void EndDialogue()

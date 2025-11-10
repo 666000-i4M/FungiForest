@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c0a29375ef1204a93e5f66aa91fc7c, type: 3}
+  m_Name: Bela
+  m_EditorClassIdentifier: 
+  npcName: BELA
+  introTexts:
+  - "Que haces en mi casa no te ense\xF1aron que es de mala educacion entrar como
+    si nada en la casa de alguien mas?"
+  repeatText: ...
+  options:
+  - text: Preguntar sobre Grisel
+    introTexts:
+    - Oh, mi hija rebelde se caso con un tipo sin reputacion un bueno para nada llamado
+      Rivel
+    - Lo eligio a el antes que asu familia asi que la eche de la casa
+    - No permitire tal deshonor
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Irse
+    introTexts:
+    - No te despides?
+    - Que grosero, los jovenes de hoy ya no hacen reverencias
+    requiresItem: 0
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Ayudar a hornear
+    introTexts: []
+    requiresItem: 1
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []
+  - text: Dar item
+    introTexts: []
+    requiresItem: 1
+    requiredItem: 
+    requiresNPC: 0
+    requiredNPC: 
+    grantsItems: 0
+    grantedItems: []

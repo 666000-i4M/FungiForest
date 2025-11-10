@@ -4,36 +4,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
- 
+
 public class IntroController : MonoBehaviour
 {
     public TextMeshProUGUI storyText;
     public GameObject controlsPanel;
     public Button startButton;
     public AudioSource ambientSound; // Referencia al AudioSource
- 
+
     void Start()
     {
         StartCoroutine(PlayIntroSequence());
     }
- 
+
     IEnumerator PlayIntroSequence()
     {
-        StartCoroutine(FadeAudio(ambientSound, 0f, 0.5f, 3f));
- 
+        StartCoroutine(FadeAudio(ambientSound, 0f, 0.5f, 3f)); 
+
         yield return StartCoroutine(FadeText(storyText, 0f, 1f, 3f));
-       
+        
         yield return new WaitForSeconds(5f);
-       
+        
         controlsPanel.SetActive(true);
         yield return StartCoroutine(FadePanel(controlsPanel.GetComponent<Image>(), 0f, 1f, 1f));
-       
+        
         yield return new WaitForSeconds(3f);
-       
+        
         startButton.gameObject.SetActive(true);
         startButton.onClick.AddListener(StartGame);
     }
- 
+
     IEnumerator FadeText(TextMeshProUGUI text, float startAlpha, float endAlpha, float duration)
     {
         Color color = text.color;
@@ -50,7 +50,7 @@ public class IntroController : MonoBehaviour
         color.a = endAlpha;
         text.color = color;
     }
- 
+
     IEnumerator FadePanel(Image panel, float startAlpha, float endAlpha, float duration)
     {
         Color color = panel.color;
@@ -67,7 +67,7 @@ public class IntroController : MonoBehaviour
         color.a = endAlpha;
         panel.color = color;
     }
- 
+
     IEnumerator FadeAudio(AudioSource audio, float startVolume, float endVolume, float duration)
     {
         audio.volume = startVolume;
@@ -81,10 +81,9 @@ public class IntroController : MonoBehaviour
         }
         audio.volume = endVolume;
     }
- 
+
     void StartGame()
     {
-        SceneManager.LoadScene("ElJuego");
+        SceneManager.LoadScene("ElJuego"); 
     }
 }
- 
